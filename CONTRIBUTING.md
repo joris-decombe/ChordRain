@@ -40,6 +40,29 @@ npm run lint
 
 When adding features that depend on file parsing, test with multiple file formats to verify compatibility.
 
+## Updating Screenshots
+
+Screenshots are generated programmatically using Playwright. This ensures documentation always matches the actual UI.
+
+```bash
+# 1. Ensure dev server is running
+npm run dev
+
+# 2. Run the screenshot script (in a new terminal)
+npm run screenshots
+```
+
+This will:
+- Launch a headless browser
+- Capture screenshots of the Landing Page, Idle Player, and Active Player
+- Generate per-theme screenshots for all 6 themes
+- Save them to `.github/screenshots/`
+
+**When to update:**
+- UI design changes
+- New visual features (e.g., new color themes)
+- Major layout updates
+
 ## Pull Request Workflow
 
 1. **Fork & Branch:** Create a feature branch from `main`.

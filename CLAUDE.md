@@ -17,6 +17,7 @@ npm test -- --run    # Vitest unit tests (single run, no watch)
 npx vitest tests/unit/validation.test.ts        # Run a single unit test file
 npx playwright test                              # All E2E tests (starts dev server automatically)
 npx playwright test tests/e2e/navigation.spec.ts # Single E2E test
+npm run screenshots  # Generate UI screenshots (requires dev server running)
 ```
 
 ## Architecture
