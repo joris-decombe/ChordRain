@@ -1,0 +1,1049 @@
+@import "tailwindcss";
+
+/* ============================================
+   THEME SYSTEM - 6 Pixel Art Color Themes
+   ============================================ */
+
+:root {
+  /* Default to cool theme */
+  --background: #060810;
+  --foreground: #E2E4E9;
+}
+
+/* --- COOL THEME (Neon) --- */
+:root, [data-theme="cool"] {
+  /* Voids & Darks */
+  --color-void: #060810;
+  --color-bg: #0c1020;
+  --color-surface: #141830;
+  --color-elevated: #1e2240;
+
+  /* Neutrals */
+  --color-border: #3a3a4a;
+  --color-muted: #5a5a6a;
+  --color-subtle: #8a8a9a;
+  --color-text: #cacad4;
+  --color-text-bright: #eaeaf0;
+
+  /* Fretboard */
+  --color-fretboard-wood: #1a1420;
+  --color-fretboard-fret: #c0a060;
+  --color-fretboard-nut: #f0e0c0;
+  --color-string: #b8b8c8;
+
+  /* Accents */
+  --color-accent-primary: #38bdf8;    /* Cyan */
+  --color-accent-secondary: #fb7185;  /* Rose */
+  --color-accent-tertiary: #a78bfa;   /* Purple */
+  --color-ui-active: #6366f1;         /* Indigo */
+
+  /* Note Colors (per string, high E to low E) */
+  --color-note-string-1: #22d3ee;
+  --color-note-string-2: #38bdf8;
+  --color-note-string-3: #818cf8;
+  --color-note-string-4: #a78bfa;
+  --color-note-string-5: #f472b6;
+  --color-note-string-6: #fb7185;
+  --color-note-unified: #a78bfa;
+
+  /* Grid */
+  --color-grid-line: rgba(99, 102, 241, 0.5);
+
+  /* VFX */
+  --vignette-alpha: 0.4;
+}
+
+/* --- WARM THEME (Sepia) --- */
+[data-theme="warm"] {
+  /* Voids & Darks */
+  --color-void: #100804;
+  --color-bg: #1e1208;
+  --color-surface: #2e1e10;
+  --color-elevated: #3e2c1a;
+
+  /* Neutrals */
+  --color-border: #5a4a3a;
+  --color-muted: #7a6a5a;
+  --color-subtle: #9a8a7a;
+  --color-text: #d4c8b8;
+  --color-text-bright: #f0e8dc;
+
+  /* Fretboard */
+  --color-fretboard-wood: #2a1a0a;
+  --color-fretboard-fret: #d4a848;
+  --color-fretboard-nut: #f8eed0;
+  --color-string: #c8b898;
+
+  /* Accents */
+  --color-accent-primary: #f59e0b;    /* Amber */
+  --color-accent-secondary: #ef4444;  /* Red */
+  --color-accent-tertiary: #d97706;   /* Orange */
+  --color-ui-active: #b45309;         /* Amber dark */
+
+  /* Note Colors */
+  --color-note-string-1: #fbbf24;
+  --color-note-string-2: #f59e0b;
+  --color-note-string-3: #f97316;
+  --color-note-string-4: #ef4444;
+  --color-note-string-5: #dc2626;
+  --color-note-string-6: #b91c1c;
+  --color-note-unified: #fbbf24;
+
+  /* Grid */
+  --color-grid-line: rgba(180, 83, 9, 0.5);
+
+  /* VFX */
+  --vignette-alpha: 0.35;
+}
+
+/* --- MONO THEME (CRT) --- */
+[data-theme="mono"] {
+  /* Voids & Darks - CRT phosphor tint */
+  --color-void: #000000;
+  --color-bg: #060806;
+  --color-surface: #0d120d;
+  --color-elevated: #141e14;
+
+  /* Neutrals - Grayscale */
+  --color-border: #333333;
+  --color-muted: #555555;
+  --color-subtle: #777777;
+  --color-text: #aaaaaa;
+  --color-text-bright: #dddddd;
+
+  /* Fretboard */
+  --color-fretboard-wood: #0a0a0a;
+  --color-fretboard-fret: #888888;
+  --color-fretboard-nut: #cccccc;
+  --color-string: #999999;
+
+  /* Accents - Phosphor green */
+  --color-accent-primary: #22c55e;
+  --color-accent-secondary: #22c55e;
+  --color-accent-tertiary: #16a34a;
+  --color-ui-active: #15803d;
+
+  /* Note Colors - All green gradient */
+  --color-note-string-1: #86efac;
+  --color-note-string-2: #4ade80;
+  --color-note-string-3: #22c55e;
+  --color-note-string-4: #16a34a;
+  --color-note-string-5: #15803d;
+  --color-note-string-6: #166534;
+  --color-note-unified: #22c55e;
+
+  /* Grid */
+  --color-grid-line: rgba(34, 197, 94, 0.4);
+
+  /* VFX */
+  --vignette-alpha: 0.5;
+}
+
+/* --- 8-BIT THEME (NES/Mario Bros Era) --- */
+[data-theme="8bit"] {
+  /* Voids & Darks */
+  --color-void: #02021a;
+  --color-bg: #080828;
+  --color-surface: #101850;
+  --color-elevated: #202878;
+
+  /* Neutrals */
+  --color-border: #5050a0;
+  --color-muted: #7878b8;
+  --color-subtle: #9898d0;
+  --color-text: #c8c8e8;
+  --color-text-bright: #fcfcfc;
+
+  /* Fretboard */
+  --color-fretboard-wood: #101040;
+  --color-fretboard-fret: #a0a0d0;
+  --color-fretboard-nut: #e0e0f0;
+  --color-string: #b0b0d0;
+
+  /* Accents - Mario Bros palette */
+  --color-accent-primary: #e52521;
+  --color-accent-secondary: #049cd8;
+  --color-accent-tertiary: #fbd000;
+  --color-ui-active: #0068b8;
+
+  /* Note Colors - NES primaries */
+  --color-note-string-1: #fbd000;
+  --color-note-string-2: #049cd8;
+  --color-note-string-3: #e52521;
+  --color-note-string-4: #43b047;
+  --color-note-string-5: #f08030;
+  --color-note-string-6: #a040a0;
+  --color-note-unified: #fbd000;
+
+  /* Grid */
+  --color-grid-line: rgba(80, 80, 160, 0.5);
+
+  /* VFX */
+  --vignette-alpha: 0.3;
+}
+
+/* --- 16-BIT THEME (SNES/Street Fighter Era) --- */
+[data-theme="16bit"] {
+  /* Voids & Darks */
+  --color-void: #060414;
+  --color-bg: #0c0a24;
+  --color-surface: #141438;
+  --color-elevated: #202050;
+
+  /* Neutrals */
+  --color-border: #4848a0;
+  --color-muted: #6868c0;
+  --color-subtle: #9090d8;
+  --color-text: #c0c0e8;
+  --color-text-bright: #f0f0ff;
+
+  /* Fretboard */
+  --color-fretboard-wood: #0c0820;
+  --color-fretboard-fret: #9090c0;
+  --color-fretboard-nut: #d8d8f0;
+  --color-string: #a0a0c8;
+
+  /* Accents - Street Fighter palette */
+  --color-accent-primary: #f08030;
+  --color-accent-secondary: #e03020;
+  --color-accent-tertiary: #30a0f0;
+  --color-ui-active: #d06020;
+
+  /* Note Colors */
+  --color-note-string-1: #f0d020;
+  --color-note-string-2: #f08030;
+  --color-note-string-3: #e03020;
+  --color-note-string-4: #30a0f0;
+  --color-note-string-5: #20c040;
+  --color-note-string-6: #c030c0;
+  --color-note-unified: #f08030;
+
+  /* Grid */
+  --color-grid-line: rgba(72, 72, 160, 0.5);
+
+  /* VFX */
+  --vignette-alpha: 0.35;
+}
+
+/* --- HI-BIT THEME (Modern Indie Pixel Art) --- */
+[data-theme="hibit"] {
+  /* Voids & Darks */
+  --color-void: #080614;
+  --color-bg: #120e28;
+  --color-surface: #1a1838;
+  --color-elevated: #24204a;
+
+  /* Neutrals */
+  --color-border: #4a4270;
+  --color-muted: #6a6290;
+  --color-subtle: #9088b0;
+  --color-text: #c8c0e0;
+  --color-text-bright: #f0ecff;
+
+  /* Fretboard */
+  --color-fretboard-wood: #100e20;
+  --color-fretboard-fret: #8880a8;
+  --color-fretboard-nut: #d0c8e8;
+  --color-string: #a098c0;
+
+  /* Accents - Modern indie palette */
+  --color-accent-primary: #ff6188;
+  --color-accent-secondary: #78dce8;
+  --color-accent-tertiary: #ab9df2;
+  --color-ui-active: #fc9867;
+
+  /* Note Colors */
+  --color-note-string-1: #ff6188;
+  --color-note-string-2: #fc9867;
+  --color-note-string-3: #ffd866;
+  --color-note-string-4: #a9dc76;
+  --color-note-string-5: #78dce8;
+  --color-note-string-6: #ab9df2;
+  --color-note-unified: #ab9df2;
+
+  /* Grid */
+  --color-grid-line: rgba(120, 220, 232, 0.4);
+
+  /* VFX */
+  --vignette-alpha: 0.45;
+}
+
+/* stylelint-disable-next-line at-rule-no-unknown */
+@theme inline {
+  --color-background: var(--color-void);
+  --color-foreground: var(--color-text);
+  --font-sans: "Pixelify Sans", system-ui, sans-serif;
+  --font-mono: "Pixelify Sans", monospace;
+  --font-display: "Press Start 2P", monospace;
+
+  /* --- Semantic Mappings --- */
+  --color-guitar-void: var(--color-void);
+  --color-guitar-bg: var(--color-bg);
+  --color-guitar-frame-dark: var(--color-void);
+  --color-guitar-frame-light: var(--color-surface);
+
+  /* --- Spacing --- */
+  --spacing-fretboard-h: 260px;
+  --spacing-string-gap: 40px;
+
+  /* --- Pixel Art Shadows --- */
+  --shadow-bevel-raised:
+    inset 2px 2px 0 0 var(--color-elevated),
+    inset -2px -2px 0 0 var(--color-border);
+
+  --shadow-bevel-pressed:
+    inset 2px 2px 0 0 var(--color-border),
+    inset -2px -2px 0 0 var(--color-elevated);
+
+  --shadow-bevel-note:
+    inset 1px 1px 0 0 rgba(255, 255, 255, 0.5),
+    inset -1px -1px 0 0 rgba(0, 0, 0, 0.4);
+
+  --shadow-bevel-active:
+    inset 2px 2px 0 0 rgba(255, 255, 255, 0.4),
+    inset -2px -2px 0 0 rgba(0, 0, 0, 0.2);
+
+  --shadow-hard: 1px 0 0 0 var(--color-border);
+  --shadow-hard-inset: inset 0 -1px 0 0 var(--color-border);
+
+  /* Animations */
+  --ease-pixel: cubic-bezier(0, 0, 0, 1);
+}
+
+@keyframes scroll {
+  from { background-position: 0 0; }
+  to { background-position: 0 var(--scroll-size, 16px); }
+}
+
+.animate-scroll {
+  animation: scroll var(--scroll-duration, 0.5s) linear infinite;
+}
+
+@keyframes marquee-bounce {
+  0%, 15%   { transform: translateX(0); }
+  85%, 100% { transform: translateX(var(--marquee-offset, 0px)); }
+}
+
+.animate-marquee-bounce {
+  animation: marquee-bounce 5s ease-in-out infinite alternate;
+}
+
+[data-playing="false"] .animate-scroll {
+  animation-play-state: paused;
+}
+
+body {
+  background: var(--color-void);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: pixelated;
+  overscroll-behavior: none;
+}
+
+/* Scrollbar Hiding */
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ============================================
+   UI COMPONENTS
+   ============================================ */
+
+/* Raised panel */
+.pixel-panel {
+  background-color: var(--color-surface);
+  background-image: repeating-conic-gradient(
+    rgba(255, 255, 255, 0.03) 0% 25%, transparent 0% 50%
+  );
+  background-size: 2px 2px;
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.06),
+    inset 1px 1px 0 0 var(--color-elevated),
+    inset -1px -1px 0 0 var(--color-void);
+}
+
+/* Per-theme dither tinting */
+[data-theme="mono"] .pixel-panel {
+  background-image: repeating-conic-gradient(
+    rgba(34, 197, 94, 0.04) 0% 25%, transparent 0% 50%
+  );
+}
+[data-theme="warm"] .pixel-panel {
+  background-image: repeating-conic-gradient(
+    rgba(245, 158, 11, 0.03) 0% 25%, transparent 0% 50%
+  );
+}
+[data-theme="8bit"] .pixel-panel {
+  background-image: repeating-conic-gradient(
+    rgba(255, 255, 255, 0.05) 0% 25%, transparent 0% 50%
+  );
+}
+
+/* Raised button */
+.pixel-btn {
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: 6px;
+  box-shadow:
+    inset 1px 1px 0 0 var(--color-elevated),
+    inset -1px -1px 0 0 var(--color-void);
+  transition: none;
+}
+
+.pixel-btn:hover {
+  background: var(--color-elevated);
+  transform: translate(-1px, -1px);
+  box-shadow:
+    inset 1px 1px 0 0 var(--color-elevated),
+    inset -1px -1px 0 0 var(--color-void),
+    2px 2px 0 0 var(--color-void);
+}
+
+.pixel-btn:active {
+  transform: translate(0, 0);
+  box-shadow:
+    inset 1px 1px 0 0 var(--color-void),
+    inset -1px -1px 0 0 var(--color-elevated);
+}
+
+/* Primary action button (colored) */
+.pixel-btn-primary {
+  background: var(--color-ui-active);
+  color: var(--color-text-bright);
+  border: 2px solid var(--color-accent-primary);
+  border-radius: 6px;
+  box-shadow:
+    inset 1px 1px 0 0 rgba(255, 255, 255, 0.2),
+    inset -1px -1px 0 0 rgba(0, 0, 0, 0.3);
+}
+
+.pixel-btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.pixel-btn-primary:active {
+  box-shadow:
+    inset 1px 1px 0 0 rgba(0, 0, 0, 0.3),
+    inset -1px -1px 0 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Pixelate SVG icons inside buttons */
+.pixel-btn svg,
+.pixel-btn-primary svg {
+  shape-rendering: crispEdges;
+}
+
+/* Inset/pressed area */
+.pixel-inset {
+  background: var(--color-void);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  box-shadow:
+    inset 1px 1px 0 0 var(--color-border),
+    inset -1px -1px 0 0 var(--color-elevated);
+}
+
+/* Divider line */
+.pixel-divider {
+  height: 2px;
+  background: linear-gradient(to bottom, var(--color-border) 50%, var(--color-elevated) 50%);
+}
+
+/* Text styles */
+.pixel-text-muted { color: var(--color-muted); }
+.pixel-text-subtle { color: var(--color-subtle); }
+.pixel-text-accent { color: var(--color-accent-primary); }
+
+/* Display font for titles */
+.pixel-title {
+  font-family: "Press Start 2P", monospace;
+  letter-spacing: 1px;
+  line-height: 1.4;
+}
+
+/* ============================================
+   THEME TRANSITIONS & EFFECTS
+   ============================================ */
+
+body {
+  transition: background-color 300ms ease, color 300ms ease;
+}
+
+.pixel-panel,
+.pixel-btn,
+.pixel-btn-primary,
+.pixel-inset {
+  transition: background-color 300ms ease, box-shadow 300ms ease;
+}
+
+/* ============================================
+   CRT / RETRO EFFECTS
+   ============================================ */
+
+/* Scanlines for retro themes */
+[data-theme="8bit"] .crt-effect::after,
+[data-theme="16bit"] .crt-effect::after,
+[data-theme="mono"] .crt-effect::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0px,
+    rgba(0, 0, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  z-index: 9999;
+}
+
+/* Phosphor glow for mono/terminal theme */
+[data-theme="mono"] .pixel-text-accent,
+[data-theme="mono"] .pixel-btn-primary {
+  text-shadow: 0 0 8px var(--color-accent-primary);
+}
+
+[data-theme="mono"] h1,
+[data-theme="mono"] .glow {
+  text-shadow:
+    0 0 4px var(--color-accent-primary),
+    0 0 12px var(--color-accent-primary);
+}
+
+/* Cinematic vignette */
+.vignette-overlay {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9990;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(0, 0, 0, var(--vignette-alpha, 0.4)) 100%);
+}
+
+/* Noise/grain texture */
+.noise-texture::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  z-index: 9998;
+  opacity: 0;
+}
+[data-theme="cool"] .noise-texture::before   { opacity: 0.018; }
+[data-theme="warm"] .noise-texture::before   { opacity: 0.025; }
+[data-theme="mono"] .noise-texture::before   { opacity: 0.04; }
+[data-theme="8bit"] .noise-texture::before   { opacity: 0.01; }
+[data-theme="16bit"] .noise-texture::before  { opacity: 0.015; }
+[data-theme="hibit"] .noise-texture::before  { opacity: 0.015; }
+
+/* ============================================
+   THEME COLOR SWATCHES
+   ============================================ */
+
+.theme-swatch {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 6px;
+}
+
+.theme-swatch > div {
+  width: 12px;
+  height: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+/* ============================================
+   KEYBOARD SHORTCUT HINTS (kbd)
+   ============================================ */
+
+.pixel-kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  font-family: "Pixelify Sans", monospace;
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  box-shadow:
+    inset 1px 1px 0 0 var(--color-elevated),
+    1px 1px 0 0 var(--color-void);
+  margin: 0 1px;
+}
+
+/* ============================================
+   PIXEL ART TOGGLE SWITCH
+   ============================================ */
+
+.pixel-toggle {
+  position: relative;
+  width: 36px;
+  height: 20px;
+  background: var(--color-void);
+  border: 2px solid var(--color-border);
+  border-radius: 4px;
+  box-shadow:
+    inset 1px 1px 0 0 var(--color-border),
+    inset -1px -1px 0 0 var(--color-elevated);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.pixel-toggle-on {
+  background: var(--color-ui-active);
+  border-color: var(--color-accent-primary);
+}
+
+.pixel-toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 12px;
+  height: 12px;
+  background: var(--color-muted);
+  border-radius: 2px;
+  box-shadow:
+    inset 1px 1px 0 0 var(--color-text),
+    inset -1px -1px 0 0 var(--color-void);
+  transition: transform 0.1s;
+}
+
+.pixel-toggle-on .pixel-toggle-thumb {
+  transform: translateX(16px);
+  background: var(--color-text-bright);
+}
+
+/* ============================================
+   TOUCH DEVICE IMPROVEMENTS
+   ============================================ */
+
+@media (pointer: coarse) {
+  input[type="range"] {
+    min-height: 24px;
+  }
+
+  .pixel-btn,
+  .pixel-btn-primary {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* ============================================
+   MENU ANIMATIONS
+   ============================================ */
+
+@keyframes pulse-border {
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.2); }
+}
+
+.pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+@keyframes cursor-bounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+}
+
+.cursor-bounce {
+  animation: cursor-bounce 0.6s ease-in-out infinite;
+}
+
+/* ============================================
+   WATERFALL BACKGROUND & EFFECTS
+   ============================================ */
+
+.waterfall-grid-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--color-grid-line, var(--color-border)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-grid-line, var(--color-border)) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.12;
+  mask-image: linear-gradient(to top,
+    rgba(0,0,0,1) 0%, rgba(0,0,0,0.7) 30%,
+    rgba(0,0,0,0.3) 65%, rgba(0,0,0,0) 100%);
+}
+
+.waterfall-layer-sky {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: radial-gradient(circle at 50% 100%, var(--color-surface) 0%, var(--color-void) 100%);
+  opacity: 0.8;
+}
+
+.waterfall-layer-macro {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.1;
+  background-image:
+    linear-gradient(to right, var(--color-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--color-border) 1px, transparent 1px);
+  background-size: 128px 128px;
+}
+
+.waterfall-layer-mid {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.15;
+  background-image:
+    linear-gradient(to right, var(--color-muted) 2px, transparent 2px),
+    linear-gradient(to bottom, var(--color-muted) 2px, transparent 2px);
+  background-size: 64px 64px;
+}
+
+.waterfall-fog-1 {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top, transparent, rgba(var(--color-void-rgb, 6, 8, 16), 0.2) 50%, rgba(var(--color-void-rgb, 6, 8, 16), 0.4) 100%);
+}
+
+.waterfall-fog-2 {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: radial-gradient(ellipse at 50% 100%, transparent 0%, var(--color-void) 100%);
+  opacity: 0.4;
+}
+
+.waterfall-occlusion {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.2;
+  background-image:
+    linear-gradient(90deg, transparent 0px, var(--color-void) 2px, var(--color-void) 13px, transparent 15px, transparent 100%),
+    linear-gradient(90deg, transparent 0%, transparent 44%, var(--color-void) 45%, var(--color-void) 49%, transparent 50%, transparent 100%);
+  background-size: 320px 100%;
+}
+
+/* ============================================
+   WATERFALL ATMOSPHERE
+   ============================================ */
+
+.waterfall-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+[data-theme="cool"] .waterfall-atmosphere {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, transparent 40%, rgba(6,8,16,0.6) 100%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(99,102,241,0.08) 0%, transparent 100%),
+    radial-gradient(ellipse 100% 50% at 30% 0%, rgba(56,189,248,0.04) 0%, transparent 100%);
+}
+
+[data-theme="warm"] .waterfall-atmosphere {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, transparent 40%, rgba(16,8,4,0.6) 100%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(245,158,11,0.10) 0%, transparent 100%);
+}
+
+[data-theme="mono"] .waterfall-atmosphere {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, transparent 40%, rgba(0,0,0,0.6) 100%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(34,197,94,0.08) 0%, transparent 100%);
+}
+
+[data-theme="8bit"] .waterfall-atmosphere {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, transparent 40%, rgba(2,2,26,0.6) 100%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(229,37,33,0.08) 0%, transparent 100%);
+}
+
+[data-theme="16bit"] .waterfall-atmosphere {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, transparent 40%, rgba(6,4,20,0.6) 100%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(240,128,48,0.08) 0%, transparent 100%),
+    radial-gradient(ellipse 100% 50% at 30% 0%, rgba(48,160,240,0.04) 0%, transparent 100%);
+}
+
+[data-theme="hibit"] .waterfall-atmosphere {
+  background:
+    radial-gradient(ellipse 120% 80% at 50% 100%, transparent 40%, rgba(8,6,20,0.6) 100%),
+    radial-gradient(ellipse 80% 30% at 50% 100%, rgba(255,97,136,0.08) 0%, transparent 100%),
+    radial-gradient(ellipse 100% 50% at 30% 0%, rgba(120,220,232,0.04) 0%, transparent 100%);
+}
+
+/* ============================================
+   WATERFALL NOTE STYLING
+   ============================================ */
+
+/* Base note block */
+.waterfall-note {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  background-image: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    transparent 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    0 0 6px rgba(255, 255, 255, 0.1);
+  image-rendering: pixelated;
+  contain: layout style;
+  transition: box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+/* Note body texture */
+.waterfall-note::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 3px;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.15) 0%,
+      transparent 25%
+    ),
+    radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.4) 0%, transparent 10%);
+  z-index: 1;
+}
+
+/* Note end-caps — hidden for clean look */
+.waterfall-note-cap {
+  display: none;
+}
+
+/* --- Proximity-based glow intensification --- */
+
+.waterfall-note[data-proximity="mid"] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.2),
+    0 0 8px rgba(255, 255, 255, 0.15);
+  filter: brightness(1.08);
+}
+
+.waterfall-note[data-proximity="near"] {
+  box-shadow:
+    inset 0 1px 5px rgba(255, 255, 255, 0.25),
+    0 0 10px rgba(255, 255, 255, 0.25),
+    0 0 20px rgba(255, 255, 255, 0.1);
+  filter: brightness(1.15) saturate(1.15);
+}
+
+/* --- Active state --- */
+@keyframes note-vibrate {
+  0%   { transform: scaleX(1.02) translateX(0); }
+  20%  { transform: scaleX(1.04) translateX(0.5px); }
+  55%  { transform: scaleX(1.03) translateX(-0.3px); }
+  80%  { transform: scaleX(1.035) translateX(0.2px); }
+  100% { transform: scaleX(1.02) translateX(0); }
+}
+
+.waterfall-note[data-active] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.3),
+    0 0 12px rgba(255, 255, 255, 0.35),
+    0 0 24px rgba(255, 255, 255, 0.12);
+  filter: brightness(1.35) saturate(1.25);
+  z-index: 100;
+  animation: note-vibrate 0.18s infinite ease-in-out;
+}
+
+[data-playing="false"] .waterfall-note[data-active] {
+  animation-play-state: paused;
+}
+
+.waterfall-note[data-active] {
+  will-change: transform, filter;
+}
+
+/* ============================================
+   THEME-SPECIFIC NOTE OVERRIDES
+   ============================================ */
+
+/* --- 8-BIT --- */
+[data-theme="8bit"] .waterfall-note {
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.6),
+    0 0 6px rgba(255, 50, 50, 0.15);
+}
+
+[data-theme="8bit"] .waterfall-note::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.4) 0px,
+    transparent 1px
+  );
+}
+
+[data-theme="8bit"] .waterfall-note[data-proximity="near"] {
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.7),
+    0 0 8px rgba(255, 50, 50, 0.5),
+    0 0 16px rgba(255, 50, 50, 0.2);
+  filter: brightness(1.15);
+}
+
+[data-theme="8bit"] .waterfall-note[data-active] {
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.7),
+    0 0 12px rgba(255, 50, 50, 0.6),
+    0 0 24px rgba(255, 50, 50, 0.25);
+}
+
+/* --- 16-BIT --- */
+[data-theme="16bit"] .waterfall-note {
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.2),
+    0 0 6px rgba(240, 128, 48, 0.15);
+}
+
+[data-theme="16bit"] .waterfall-note::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.15) 0%,
+    transparent 25%,
+    transparent 100%
+  );
+}
+
+[data-theme="16bit"] .waterfall-note[data-proximity="near"] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.25),
+    0 0 8px rgba(240, 128, 48, 0.45),
+    0 0 16px rgba(240, 128, 48, 0.2);
+  filter: brightness(1.15) saturate(1.15);
+}
+
+[data-theme="16bit"] .waterfall-note[data-active] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.3),
+    0 0 12px rgba(240, 128, 48, 0.6),
+    0 0 24px rgba(240, 128, 48, 0.25);
+}
+
+/* --- MONO --- */
+[data-theme="mono"] .waterfall-note {
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.15),
+    inset 0 0 3px rgba(34, 197, 94, 0.15),
+    0 0 6px rgba(34, 197, 94, 0.15);
+}
+
+[data-theme="mono"] .waterfall-note::before {
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 20%,
+      transparent 100%
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 1px,
+      rgba(0, 0, 0, 0.1) 1px,
+      rgba(0, 0, 0, 0.1) 2px
+    );
+}
+
+[data-theme="mono"] .waterfall-note[data-proximity="near"] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.2),
+    0 0 8px rgba(34, 197, 94, 0.5),
+    0 0 16px rgba(34, 197, 94, 0.25);
+  filter: brightness(1.15);
+}
+
+[data-theme="mono"] .waterfall-note[data-active] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.25),
+    0 0 12px rgba(34, 197, 94, 0.7),
+    0 0 24px rgba(34, 197, 94, 0.35);
+}
+
+/* --- COOL --- */
+[data-theme="cool"] .waterfall-note {
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.15),
+    0 0 6px rgba(99, 102, 241, 0.15);
+}
+
+[data-theme="cool"] .waterfall-note[data-proximity="near"] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.2),
+    0 0 8px rgba(99, 102, 241, 0.5),
+    0 0 16px rgba(99, 102, 241, 0.25);
+}
+
+[data-theme="cool"] .waterfall-note[data-active] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.3),
+    0 0 12px rgba(99, 102, 241, 0.7),
+    0 0 24px rgba(99, 102, 241, 0.35);
+}
+
+/* --- WARM --- */
+[data-theme="warm"] .waterfall-note {
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.15),
+    0 0 6px rgba(245, 158, 11, 0.15);
+}
+
+[data-theme="warm"] .waterfall-note::before {
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 240, 200, 0.2) 0%,
+    transparent 25%,
+    transparent 100%
+  );
+}
+
+[data-theme="warm"] .waterfall-note[data-proximity="near"] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.2),
+    0 0 8px rgba(245, 158, 11, 0.45),
+    0 0 16px rgba(245, 158, 11, 0.2);
+  filter: brightness(1.15);
+}
+
+[data-theme="warm"] .waterfall-note[data-active] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.3),
+    0 0 12px rgba(245, 158, 11, 0.6),
+    0 0 24px rgba(245, 158, 11, 0.25);
+}
+
+/* --- HI-BIT --- */
+[data-theme="hibit"] .waterfall-note {
+  box-shadow:
+    inset 0 1px 3px rgba(255, 255, 255, 0.15),
+    0 0 6px rgba(255, 97, 136, 0.15);
+}
+
+[data-theme="hibit"] .waterfall-note[data-proximity="near"] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.2),
+    0 0 8px rgba(255, 97, 136, 0.5),
+    0 0 16px rgba(255, 97, 136, 0.2);
+  filter: brightness(1.15) saturate(1.2);
+}
+
+[data-theme="hibit"] .waterfall-note[data-active] {
+  box-shadow:
+    inset 0 1px 4px rgba(255, 255, 255, 0.3),
+    0 0 12px rgba(255, 97, 136, 0.6),
+    0 0 24px rgba(255, 97, 136, 0.25);
+  filter: brightness(1.35) saturate(1.25);
+}

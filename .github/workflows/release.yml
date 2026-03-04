@@ -1,0 +1,95 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Build project
+        run: npm run build
+
+      - name: Verify build
+        run: |
+          if [ ! -d "out" ]; then
+            echo "Build failed: out directory not found"
+            exit 1
+          fi
+          echo "Build successful - out directory created"
+
+      - name: Create dist archive
+        run: |
+          cd out
+          tar -czf ../chord-rain-dist.tar.gz .
+          cd ..
+          zip -r chord-rain-dist.zip out/
+
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # Get the previous tag
+          PREV_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1) 2>/dev/null || echo "")
+
+          # Generate changelog
+          if [ -z "$PREV_TAG" ]; then
+            echo "## What's Changed" > RELEASE_NOTES.md
+            echo "" >> RELEASE_NOTES.md
+            echo "Initial release of ChordRain" >> RELEASE_NOTES.md
+            echo "" >> RELEASE_NOTES.md
+            echo "### Features" >> RELEASE_NOTES.md
+            echo "- Guitar Hero-style waterfall note visualization" >> RELEASE_NOTES.md
+            echo "- MIDI and Guitar Pro file support" >> RELEASE_NOTES.md
+            echo "- 6 pixel art themes with VFX engine" >> RELEASE_NOTES.md
+            echo "- Acoustic guitar audio engine" >> RELEASE_NOTES.md
+          else
+            echo "## What's Changed" > RELEASE_NOTES.md
+            echo "" >> RELEASE_NOTES.md
+            git log ${PREV_TAG}..HEAD --pretty=format:"- %s (%h)" >> RELEASE_NOTES.md
+          fi
+
+          echo "" >> RELEASE_NOTES.md
+          echo "" >> RELEASE_NOTES.md
+          echo "**Full Changelog**: https://github.com/${{ github.repository }}/compare/${PREV_TAG}...${{ github.ref_name }}" >> RELEASE_NOTES.md
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          body_path: RELEASE_NOTES.md
+          files: |
+            chord-rain-dist.tar.gz
+            chord-rain-dist.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: out/
+          retention-days: 90
