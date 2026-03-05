@@ -297,40 +297,39 @@ function GuitarLesson({ song, allSongs, onSongChange, onExit }: GuitarLessonProp
             <div className="relative flex-1 flex flex-col min-h-0 items-center w-full">
 
               <div
-                ref={waterfallContainerRef}
-                data-testid="waterfall-container"
-                className="absolute top-0 z-40 pointer-events-none"
+                className="absolute top-0 pointer-events-none waterfall-perspective"
                 style={{
                   width: `${fretboardWidth}px`,
                   bottom: 'var(--spacing-fretboard-h)',
-                  '--playback-rate': audio.playbackRate
-                } as React.CSSProperties}
-              >
-                <div className="waterfall-atmosphere" aria-hidden="true" />
-                <Waterfall
-                  midi={audio.midi}
-                  currentTick={audio.currentTick}
-                  isPlaying={audio.isPlaying}
-                  playbackRate={audio.playbackRate}
-                  lookAheadTicks={audio.lookAheadTicks}
-                  showGrid={showGrid}
-                  containerHeight={waterfallHeight}
-                />
-              </div>
-
-              <div
-                className="absolute top-0 z-[42] pointer-events-none"
-                style={{
-                  width: `${fretboardWidth}px`,
-                  bottom: 'var(--spacing-fretboard-h)'
                 }}
               >
-                <EffectsCanvas
-                  activeNotes={effectsNotes}
-                  containerHeight={waterfallHeight}
-                  theme={theme}
-                  isPlaying={audio.isPlaying}
-                />
+                <div
+                  ref={waterfallContainerRef}
+                  data-testid="waterfall-container"
+                  className="w-full h-full waterfall-highway"
+                  style={{
+                    '--playback-rate': audio.playbackRate
+                  } as React.CSSProperties}
+                >
+                  <div className="waterfall-atmosphere" aria-hidden="true" />
+                  <Waterfall
+                    midi={audio.midi}
+                    currentTick={audio.currentTick}
+                    isPlaying={audio.isPlaying}
+                    playbackRate={audio.playbackRate}
+                    lookAheadTicks={audio.lookAheadTicks}
+                    showGrid={showGrid}
+                    containerHeight={waterfallHeight}
+                  />
+                  <div className="absolute top-0 left-0 z-[42] pointer-events-none">
+                    <EffectsCanvas
+                      activeNotes={effectsNotes}
+                      containerHeight={waterfallHeight}
+                      theme={theme}
+                      isPlaying={audio.isPlaying}
+                    />
+                  </div>
+                </div>
               </div>
 
               <div className="flex-1" />

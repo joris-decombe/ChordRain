@@ -193,6 +193,22 @@ export function Waterfall({
                 } as React.CSSProperties}
             />
 
+            {/* Lane backgrounds with per-string color */}
+            {showGrid && Array.from({ length: NUM_STRINGS }, (_, i) => {
+                const y = containerHeight - ((i + 1) * laneHeight);
+                return (
+                    <div
+                        key={`lane-bg-${i}`}
+                        className="waterfall-lane-bg"
+                        style={{
+                            top: `${y}px`,
+                            height: `${laneHeight}px`,
+                            backgroundColor: `var(--color-note-string-${i + 1})`,
+                        }}
+                    />
+                );
+            })}
+
             {/* String lane dividers */}
             {showGrid && Array.from({ length: NUM_STRINGS - 1 }, (_, i) => {
                 const y = (i + 1) * laneHeight;
@@ -263,6 +279,9 @@ export function Waterfall({
                     </div>
                 ))}
             </div>
+
+            {/* Strike line at fretboard boundary */}
+            <div className="waterfall-strike-line" />
 
             {/* Foreground occlusion */}
             <div

@@ -732,6 +732,64 @@ body {
 }
 
 /* ============================================
+   WATERFALL STRIKE LINE & PERSPECTIVE
+   ============================================ */
+
+/* 3D highway perspective */
+.waterfall-perspective {
+  perspective: 1000px;
+  perspective-origin: 50% 100%;
+}
+
+.waterfall-highway {
+  position: relative;
+  transform: rotateX(3deg);
+  transform-origin: bottom center;
+}
+
+/* Strike line at waterfall/fretboard boundary */
+.waterfall-strike-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 35;
+  pointer-events: none;
+  background: var(--color-accent-primary);
+  box-shadow:
+    0 0 6px var(--color-accent-primary),
+    0 0 14px var(--color-accent-primary),
+    0 1px 3px rgba(0, 0, 0, 0.5);
+  opacity: 0.7;
+}
+
+/* Pulsing glow when playing */
+@keyframes strike-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 0.9; }
+}
+
+[data-playing="true"] .waterfall-strike-line {
+  animation: strike-pulse 2s ease-in-out infinite;
+}
+
+/* Lane backgrounds with per-string color wash */
+.waterfall-lane-bg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.04;
+  mask-image: linear-gradient(to top,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,0.3) 60%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+/* ============================================
    WATERFALL ATMOSPHERE
    ============================================ */
 
@@ -788,7 +846,7 @@ body {
 /* Base note block */
 .waterfall-note {
   border: 1px solid rgba(0, 0, 0, 0.25);
-  border-radius: 3px;
+  border-radius: 4px 4px 6px 6px;
   background-image: linear-gradient(135deg,
     rgba(255, 255, 255, 0.45) 0%,
     transparent 50%,
@@ -819,9 +877,23 @@ body {
   z-index: 1;
 }
 
-/* Note end-caps — hidden for clean look */
-.waterfall-note-cap {
-  display: none;
+/* Note gem head — brighter leading edge at the bottom */
+.waterfall-note::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: -1px;
+  right: -1px;
+  height: 8px;
+  max-height: 60%;
+  pointer-events: none;
+  border-radius: 0 0 6px 6px;
+  background: linear-gradient(to top,
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(255, 255, 255, 0.15) 50%,
+    transparent 100%
+  );
+  z-index: 2;
 }
 
 /* --- Proximity-based glow intensification --- */
@@ -830,15 +902,17 @@ body {
   box-shadow:
     inset 0 1px 4px rgba(255, 255, 255, 0.2),
     0 0 8px rgba(255, 255, 255, 0.15);
-  filter: brightness(1.08);
+  filter: brightness(1.1);
+  transform: scaleX(1.02);
 }
 
 .waterfall-note[data-proximity="near"] {
   box-shadow:
-    inset 0 1px 5px rgba(255, 255, 255, 0.25),
-    0 0 10px rgba(255, 255, 255, 0.25),
-    0 0 20px rgba(255, 255, 255, 0.1);
-  filter: brightness(1.15) saturate(1.15);
+    inset 0 1px 5px rgba(255, 255, 255, 0.3),
+    0 0 12px rgba(255, 255, 255, 0.3),
+    0 0 24px rgba(255, 255, 255, 0.12);
+  filter: brightness(1.2) saturate(1.2);
+  transform: scaleX(1.04);
 }
 
 /* --- Active state --- */

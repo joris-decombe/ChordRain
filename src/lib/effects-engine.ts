@@ -55,7 +55,7 @@ interface PhosphorTrace {
 // Constants
 // ---------------------------------------------------------------------------
 
-const IMPACT_FLASH_DURATION = 150;
+const IMPACT_FLASH_DURATION = 200;
 
 const DEBRIS_COOLDOWN = 250;
 
@@ -575,19 +575,37 @@ export class EffectsEngine {
             if (elapsed >= IMPACT_FLASH_DURATION) continue;
 
             const progress = elapsed / IMPACT_FLASH_DURATION;
-            const alpha = 0.6 * (1 - progress) * (1 - progress);
+            const alpha = 0.7 * (1 - progress) * (1 - progress);
 
             const parsed = parseColor(f.color);
             const r = parsed ? Math.round((255 + parsed.r) / 2) : 255;
             const g = parsed ? Math.round((255 + parsed.g) / 2) : 255;
             const b = parsed ? Math.round((255 + parsed.b) / 2) : 255;
 
+            // Hot flash on the strike line
             ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
             ctx.fillRect(
-                Math.round(f.left),
-                Math.round(this.impactY - 6),
-                f.width,
-                6,
+                Math.round(f.left - 2),
+                Math.round(this.impactY - 8),
+                f.width + 4,
+                8,
+            );
+
+            // Expanding burst glow
+            const burstRadius = f.width * (1 + progress * 1.5);
+            const centerX = f.left + f.width / 2;
+            const burstGrad = ctx.createRadialGradient(
+                centerX, this.impactY, 0,
+                centerX, this.impactY, burstRadius,
+            );
+            burstGrad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${alpha * 0.6})`);
+            burstGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+            ctx.fillStyle = burstGrad;
+            ctx.fillRect(
+                Math.round(centerX - burstRadius),
+                Math.round(this.impactY - burstRadius),
+                Math.round(burstRadius * 2),
+                Math.round(burstRadius * 2),
             );
         }
 
@@ -678,17 +696,25 @@ export class EffectsEngine {
         notes: EffectsNote[],
     ): void {
         ctx.save();
-        const railHeight = 2;
+        const railHeight = 4;
         const y = this.impactY - railHeight;
 
         const themeColor = THEME_ACCENTS[this.theme] || THEME_ACCENTS.cool;
         const parsedTheme = parseColor(themeColor)!;
 
-        ctx.fillStyle = `rgba(${parsedTheme.r}, ${parsedTheme.g}, ${parsedTheme.b}, 0.15)`;
-        ctx.fillRect(0, Math.round(y), this.totalWidth, railHeight);
+        // Base rail glow
+        const baseGrad = ctx.createLinearGradient(0, y - 4, 0, y + railHeight + 4);
+        baseGrad.addColorStop(0, "rgba(0,0,0,0)");
+        baseGrad.addColorStop(0.3, `rgba(${parsedTheme.r}, ${parsedTheme.g}, ${parsedTheme.b}, 0.08)`);
+        baseGrad.addColorStop(0.5, `rgba(${parsedTheme.r}, ${parsedTheme.g}, ${parsedTheme.b}, 0.25)`);
+        baseGrad.addColorStop(0.7, `rgba(${parsedTheme.r}, ${parsedTheme.g}, ${parsedTheme.b}, 0.08)`);
+        baseGrad.addColorStop(1, "rgba(0,0,0,0)");
+        ctx.fillStyle = baseGrad;
+        ctx.fillRect(0, Math.round(y - 4), this.totalWidth, railHeight + 8);
 
-        ctx.fillStyle = `rgba(${parsedTheme.r}, ${parsedTheme.g}, ${parsedTheme.b}, 0.4)`;
-        ctx.fillRect(0, Math.round(y), this.totalWidth, 1);
+        // Bright center line
+        ctx.fillStyle = `rgba(${parsedTheme.r}, ${parsedTheme.g}, ${parsedTheme.b}, 0.5)`;
+        ctx.fillRect(0, Math.round(y + 1), this.totalWidth, 2);
 
         ctx.globalCompositeOperation = "lighter";
         for (const n of notes) {
@@ -698,6 +724,7 @@ export class EffectsEngine {
             const { centerX, width } = getNoteCenterAndWidth(n.string, n.fret);
             const left = centerX - width / 2;
 
+            // Hot spot on rail where note meets strike line
             const grad = ctx.createLinearGradient(0, y, 0, y + railHeight);
             grad.addColorStop(0, `rgba(${parsed.r},${parsed.g},${parsed.b}, 1)`);
             grad.addColorStop(0.5, "rgba(255, 255, 255, 1)");
@@ -706,18 +733,20 @@ export class EffectsEngine {
             ctx.fillStyle = grad;
             ctx.fillRect(Math.round(left), Math.round(y), width, railHeight);
 
+            // Bloom around active strike points
             const bloomGrad = ctx.createRadialGradient(
                 centerX, y + railHeight / 2, 0,
-                centerX, y + railHeight / 2, width,
+                centerX, y + railHeight / 2, width * 1.5,
             );
-            bloomGrad.addColorStop(0, `rgba(${parsed.r},${parsed.g},${parsed.b}, 0.5)`);
+            bloomGrad.addColorStop(0, `rgba(${parsed.r},${parsed.g},${parsed.b}, 0.6)`);
+            bloomGrad.addColorStop(0.5, `rgba(${parsed.r},${parsed.g},${parsed.b}, 0.15)`);
             bloomGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
             ctx.fillStyle = bloomGrad;
             ctx.fillRect(
-                Math.round(left - width / 2),
-                Math.round(y - 10),
-                width * 2,
-                20,
+                Math.round(left - width),
+                Math.round(y - 14),
+                width * 3,
+                28 + railHeight,
             );
         }
         ctx.restore();
