@@ -155,7 +155,6 @@ export function useGuitarAudio(source: SongSource | null, settings: GuitarAudioS
                     "F#4": "Fs4.mp3",
                     A4: "A4.mp3",
                     C5: "C5.mp3",
-                    E5: "E5.mp3",
                 },
                 release: 2,
                 baseUrl: `${process.env.NEXT_PUBLIC_BASE_PATH ?? '/ChordRain'}/guitar-acoustic/`,
@@ -172,11 +171,11 @@ export function useGuitarAudio(source: SongSource | null, settings: GuitarAudioS
             let arrayBuffer: ArrayBuffer | Uint8Array;
 
             if (source.type === 'guitarPro' && source.url) {
-                // Guitar Pro files will be handled in Phase 6
-                // For now, fall through to MIDI loading as placeholder
-                console.warn('Guitar Pro loading not yet implemented, treating as MIDI');
                 const response = await fetch(source.url);
-                arrayBuffer = await response.arrayBuffer();
+                const gpBuffer = await response.arrayBuffer();
+                const { loadGuitarPro } = await import("@/lib/guitarpro-loader");
+                const result = await loadGuitarPro(gpBuffer);
+                arrayBuffer = new Uint8Array(result.midiBuffer);
             } else if (source.type === 'midi' && source.url) {
                 const response = await fetch(source.url);
                 arrayBuffer = await response.arrayBuffer();
