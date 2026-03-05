@@ -4,7 +4,7 @@ A Guitar Hero-style interactive guitar trainer built with Next.js and Web Audio.
 
 [**Live Demo**](https://joris-decombe.github.io/ChordRain/)
 
-![Landing Page](.github/screenshots/landing.png)
+![In-Game](.github/screenshots/player-active.png)
 
 ## Overview
 
@@ -33,20 +33,15 @@ ChordRain helps users learn guitar through a real-time falling-note fretboard vi
 
 ## Screenshots
 
-### Landing Page
-Choose a song or import your own MIDI / Guitar Pro file.
-
-![Landing Page](.github/screenshots/landing.png)
-
 ### Themes
 
 | 8-Bit | 16-Bit | Hi-Bit |
 |:---:|:---:|:---:|
-| ![8-Bit](.github/screenshots/theme-8bit.png) | ![16-Bit](.github/screenshots/theme-16bit.png) | ![Hi-Bit](.github/screenshots/theme-hibit.png) |
+| ![8-Bit](.github/screenshots/theme-8bit-active.png) | ![16-Bit](.github/screenshots/theme-16bit-active.png) | ![Hi-Bit](.github/screenshots/theme-hibit-active.png) |
 
 | Cool | Warm | Mono |
 |:---:|:---:|:---:|
-| ![Cool](.github/screenshots/theme-cool.png) | ![Warm](.github/screenshots/theme-warm.png) | ![Mono](.github/screenshots/theme-mono.png) |
+| ![Cool](.github/screenshots/theme-cool-active.png) | ![Warm](.github/screenshots/theme-warm-active.png) | ![Mono](.github/screenshots/theme-mono-active.png) |
 
 ## Getting Started
 
