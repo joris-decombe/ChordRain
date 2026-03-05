@@ -118,7 +118,7 @@ async function takeScreenshots() {
 
           // Try active player screenshot for each theme
           console.log(`  - Active player for ${theme}...`);
-          const songCard = page.getByTestId('song-twinkle');
+          const songCard = page.getByTestId('song-amazing-grace');
           await songCard.scrollIntoViewIfNeeded();
           await songCard.click();
           await page.waitForSelector('footer');
@@ -154,7 +154,7 @@ async function takeScreenshots() {
 
       // 2. Player View (idle / loading)
       console.log(`  - Player view (${config.name})...`);
-      const songCard = page.getByTestId('song-twinkle');
+      const songCard = page.getByTestId('song-amazing-grace');
       await songCard.scrollIntoViewIfNeeded();
       await songCard.click();
       await page.waitForSelector('footer');

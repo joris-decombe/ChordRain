@@ -95,7 +95,20 @@ function saveSongPosition(songId: string, tick: number) {
 }
 
 const defaultSongs: Song[] = [
-  { id: 'twinkle', title: 'Twinkle Twinkle Little Star', artist: 'Traditional', url: `${BASE_PATH}/scores/twinkle.mid`, type: 'midi', difficulty: 'beginner' },
+  // Beginner
+  { id: 'amazing-grace', title: 'Amazing Grace', artist: 'Traditional', url: `${BASE_PATH}/scores/amazing-grace.gp4`, type: 'guitarPro', difficulty: 'beginner' },
+  { id: 'auld-lang-syne', title: 'Auld Lang Syne', artist: 'Traditional', url: `${BASE_PATH}/scores/auld-lang-syne.gp3`, type: 'guitarPro', difficulty: 'beginner' },
+  { id: 'oh-when-the-saints', title: 'Oh When the Saints', artist: 'Traditional', url: `${BASE_PATH}/scores/oh-when-the-saints.gp3`, type: 'guitarPro', difficulty: 'beginner' },
+  { id: 'silent-night', title: 'Silent Night', artist: 'Traditional', url: `${BASE_PATH}/scores/silent-night.gp3`, type: 'guitarPro', difficulty: 'beginner' },
+  { id: 'sakura', title: 'Sakura Sakura', artist: 'Traditional (Japanese)', url: `${BASE_PATH}/scores/sakura.gp5`, type: 'guitarPro', difficulty: 'beginner' },
+  // Intermediate
+  { id: 'greensleeves', title: 'Greensleeves', artist: 'Traditional (English)', url: `${BASE_PATH}/scores/greensleeves.gp3`, type: 'guitarPro', difficulty: 'intermediate' },
+  { id: 'drunken-sailor', title: 'Drunken Sailor', artist: 'Traditional (Irish)', url: `${BASE_PATH}/scores/drunken-sailor.gp3`, type: 'guitarPro', difficulty: 'intermediate' },
+  { id: 'el-condor-pasa', title: 'El Cóndor Pasa', artist: 'Traditional (Peruvian)', url: `${BASE_PATH}/scores/el-condor-pasa.gp3`, type: 'guitarPro', difficulty: 'intermediate' },
+  { id: 'the-water-is-wide', title: 'The Water Is Wide', artist: 'Traditional (Scottish)', url: `${BASE_PATH}/scores/the-water-is-wide.gpx`, type: 'guitarPro', difficulty: 'intermediate' },
+  // Advanced
+  { id: 'blackberry-blossom', title: 'Blackberry Blossom', artist: 'Traditional (Bluegrass)', url: `${BASE_PATH}/scores/blackberry-blossom.gp4`, type: 'guitarPro', difficulty: 'advanced' },
+  { id: 'wild-rover', title: 'The Wild Rover', artist: 'Traditional (Irish)', url: `${BASE_PATH}/scores/wild-rover.gp4`, type: 'guitarPro', difficulty: 'advanced' },
 ];
 
 function HelpModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
@@ -434,11 +447,17 @@ export default function Home() {
       const results: Record<string, number> = {};
       for (const song of defaultSongs) {
         try {
-          if (song.type === 'midi' && song.url) {
+          if (song.url) {
             const res = await fetch(song.url);
             const buf = await res.arrayBuffer();
-            const midi = new Midi(buf);
-            results[song.id] = midi.duration;
+            if (song.type === 'guitarPro') {
+              const result = await loadGuitarPro(buf);
+              const midi = new Midi(result.midiBuffer);
+              results[song.id] = midi.duration;
+            } else {
+              const midi = new Midi(buf);
+              results[song.id] = midi.duration;
+            }
           }
         } catch (e) {
           console.error(`Failed to compute duration for ${song.id}`, e);
@@ -755,14 +774,14 @@ export default function Home() {
                     transition={{ duration: 0.2, delay: Math.min(index, 6) * 0.05 }}
                     onMouseEnter={playHoverSound}
                     onClick={() => { playSelectSound(); selectSong(song); }}
-                    className={`group relative w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-[var(--color-ui-active)] transition-colors ${isFirstTimer && song.id === 'twinkle' ? 'bg-[var(--color-ui-active)]' : ''}`}
+                    className={`group relative w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-[var(--color-ui-active)] transition-colors ${isFirstTimer && song.id === 'amazing-grace' ? 'bg-[var(--color-ui-active)]' : ''}`}
                   >
                     <span className="w-4 shrink-0 opacity-0 group-hover:opacity-100 pixel-text-accent text-xs cursor-bounce transition-opacity">&#9654;</span>
 
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <span className="text-sm font-bold text-[var(--color-text-bright)] uppercase tracking-tighter truncate">{song.title}</span>
-                        {isFirstTimer && song.id === 'twinkle' && (
+                        {isFirstTimer && song.id === 'amazing-grace' && (
                           <span className="shrink-0 text-[9px] font-bold uppercase tracking-tight px-1.5 py-0.5 bg-[var(--color-accent-primary)] text-[var(--color-void)]">START HERE</span>
                         )}
                       </div>
