@@ -226,24 +226,7 @@ export function Waterfall({
                 );
             })}
 
-            {/* String labels on left edge */}
-            {showGrid && Array.from({ length: NUM_STRINGS }, (_, i) => {
-                const labels = ["e", "B", "G", "D", "A", "E"];
-                const y = containerHeight - (i * laneHeight + laneHeight / 2);
-                return (
-                    <div
-                        key={`slabel-${i}`}
-                        className="absolute left-1 z-20 text-[9px] font-bold pointer-events-none"
-                        style={{
-                            top: `${y - 6}px`,
-                            color: "var(--color-subtle)",
-                            opacity: 0.4,
-                        }}
-                    >
-                        {labels[i]}
-                    </div>
-                );
-            })}
+            {/* String labels removed — fretboard below has them */}
 
             {/* Note waterfall */}
             <div className="relative w-full h-full z-10">
@@ -265,12 +248,14 @@ export function Waterfall({
                         } as React.CSSProperties}
                     >
                         {/* Fret number label */}
-                        {note.width >= 16 && (
+                        {note.width >= 14 && (
                             <span
                                 className="absolute inset-0 flex items-center justify-center font-bold pointer-events-none"
                                 style={{
-                                    color: "rgba(0,0,0,0.5)",
+                                    color: "rgba(255,255,255,0.85)",
                                     fontSize: note.width < 24 ? 8 : 10,
+                                    fontFamily: "ui-monospace, 'Cascadia Mono', 'Consolas', monospace",
+                                    textShadow: "0 1px 2px rgba(0,0,0,0.6)",
                                 }}
                             >
                                 {note.fret === 0 ? "O" : note.fret}

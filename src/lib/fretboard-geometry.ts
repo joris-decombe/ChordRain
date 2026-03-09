@@ -82,7 +82,7 @@ export function getFretCenterX(fret: number): number {
  * For fret 0, returns a fixed width for the "open string" indicator.
  */
 export function getFretWidth(fret: number): number {
-  if (fret <= 0) return 24; // Fixed width for open string indicator
+  if (fret <= 0) return 32; // Fixed width for open string indicator
   return FRET_POSITIONS[fret] - FRET_POSITIONS[fret - 1];
 }
 

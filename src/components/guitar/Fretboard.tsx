@@ -167,6 +167,7 @@ export default function Fretboard({ activeNotes, scale = 1 }: FretboardProps) {
               textAlign: "center",
               color: "var(--color-subtle)",
               fontSize: 11,
+              fontFamily: "ui-monospace, 'Cascadia Mono', 'Consolas', monospace",
             }}
           >
             {STRING_LABELS[i]}
@@ -208,6 +209,7 @@ export default function Fretboard({ activeNotes, scale = 1 }: FretboardProps) {
                 style={{
                   color: "var(--color-void)",
                   fontSize: width < 20 ? 8 : 10,
+                  fontFamily: "ui-monospace, 'Cascadia Mono', 'Consolas', monospace",
                 }}
               >
                 {fret === 0 ? "O" : fret}
