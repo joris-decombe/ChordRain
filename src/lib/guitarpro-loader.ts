@@ -95,14 +95,16 @@ export async function loadGuitarPro(arrayBuffer: ArrayBuffer): Promise<GuitarPro
     const midiGenerator = new alphaTab.midi.MidiFileGenerator(score, settings, handler);
     midiGenerator.generate();
 
-    // Filter out MIDI 2.0 NoteBend events that can't be serialized to SMF 1.0
+    // Filter out MIDI 2.0 NoteBend events that can't be serialized to SMF 1.0.
+    // We detect them by the `noteKey` property which is unique to NoteBendEvent
+    // (constructor.name won't survive minification).
     for (const track of midiFile.tracks) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const t = track as any;
         if (t.events && Array.isArray(t.events)) {
             t.events = t.events.filter(
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                (evt: any) => evt?.constructor?.name !== 'NoteBendEvent'
+                (evt: any) => !('noteKey' in evt)
             );
         }
     }

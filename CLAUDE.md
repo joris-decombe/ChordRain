@@ -34,8 +34,9 @@ npm run screenshots  # Generate UI screenshots (requires dev server running)
 
 ### File Format Support
 
+- **Guitar Pro** (primary): Parsed via `@coderline/alphatab` (`src/lib/guitarpro-loader.ts`). Supports .gp, .gp3, .gp4, .gp5, .gpx with technique data. Converts to MIDI buffer internally — must filter out `NoteBendEvent` before `toBinary()` or it crashes with "Note Bend (Midi2.0) events cannot be exported to SMF1.0".
 - **MIDI**: Parsed via `@tonejs/midi`. String assignment algorithm maps MIDI notes to (string, fret) pairs with hand-movement minimization (`src/lib/string-assignment.ts`).
-- **Guitar Pro**: Parsed via `@coderline/alphatab` (`src/lib/guitarpro-loader.ts`). Supports .gp, .gp3, .gp4, .gp5, .gpx with technique data (bends, slides, hammer-ons, pull-offs, vibrato).
+- **Audio samples**: 12 acoustic guitar mp3 files in `public/guitar-acoustic/` (CC-by 3.0, from [tonejs-instruments](https://github.com/nbrosowsky/tonejs-instruments)). Tone.js Sampler interpolates between samples. The app won't load past the loading screen without these files.
 
 ### Theme System
 
@@ -52,10 +53,12 @@ Local `useState` for UI state, refs for mutable Tone.js references, `useSyncExte
 - **Static export**: `output: "export"` — no server-side features (no API routes, no SSR)
 - **React Compiler**: Enabled (`reactCompiler: true`) — automatic memoization via `babel-plugin-react-compiler`. **WARNING:** The compiler generates internal dependency arrays at compile time. Code changes that alter dependency analysis (adding new variables, loops, or function calls inside effect/callback bodies) can cause: _"The final argument passed to useEffect changed size between renders."_ Safe: modifying literals/math using already-captured variables. Unsafe: adding new control flow, new `useRef` hooks, or referencing new variables inside effects.
 - **VFX constants are data-driven**: All theme-specific VFX tuning lives in `src/lib/vfx-constants.ts`. Do NOT hardcode theme gates (e.g. `if (theme === '8bit')`) in the effects engine — use the config tables.
+- **alphatab NoteBendEvent**: alphatab's MIDI generator produces MIDI 2.0 NoteBend events. These MUST be filtered from `midiFile.tracks[].events` before calling `toBinary()`, or it throws. Filter using `!('noteKey' in evt)` — do NOT use `constructor.name` checks as they break in minified builds. See `guitarpro-loader.ts`.
 - **Guitar constants**: `NUM_STRINGS = 6`, `NUM_FRETS = 22`, `STANDARD_TUNING = [64, 59, 55, 50, 45, 40]` (E4 to E2) in `src/lib/guitar-constants.ts`.
 - **Git workflow**: Never amend commits — always fix forward.
 - **Path alias**: `@/*` maps to `./src/*`
 - **Playwright baseURL**: `http://localhost:3000/ChordRain`
+- **Bundled songs**: 11 public domain Guitar Pro tabs in `public/scores/`. Song list defined in `defaultSongs` array in `page.tsx`. All are `type: 'guitarPro'`.
 
 ## Testing
 
